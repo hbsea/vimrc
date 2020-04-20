@@ -1,3 +1,5 @@
+scriptencoding utf8
+
 let s:nomodeline = (v:version > 703 || (v:version == 703 && has('patch442'))) ? '<nomodeline>' : ''
 
 let s:hunk_re = '^@@ -\(\d\+\),\?\(\d*\) +\(\d\+\),\?\(\d*\) @@'
@@ -118,7 +120,7 @@ function! gitgutter#diff#run_diff(bufnr, from, preserve_full_diff) abort
     endif
 
     " Write file from index to temporary file.
-    let index_name = g:gitgutter_diff_base.':'.gitgutter#utility#repo_path(a:bufnr, 1)
+    let index_name = gitgutter#utility#get_diff_base(a:bufnr).':'.gitgutter#utility#repo_path(a:bufnr, 1)
     let cmd .= g:gitgutter_git_executable.' '.g:gitgutter_git_args.' --no-pager show '.index_name.' > '.from_file.' && '
 
   elseif a:from ==# 'working_tree'
@@ -405,5 +407,3 @@ endfunction
 function! s:save_last_seen_change(bufnr) abort
   call gitgutter#utility#setbufvar(a:bufnr, 'tick', getbufvar(a:bufnr, 'changedtick'))
 endfunction
-
-
