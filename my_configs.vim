@@ -30,4 +30,3 @@ inoremap <M-w> ""<esc>i
 cno <M-h> e ~/
 cno <M-j> e ./
 cno <M-c> e <C-\>eCurrentFileDir("e")<cr>
-
