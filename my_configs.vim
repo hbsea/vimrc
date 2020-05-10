@@ -1,3 +1,4 @@
+set number
 map kj <esc>
 map jk <esc>
 imap jk <esc>
@@ -27,6 +28,14 @@ inoremap <M-w> ""<esc>i
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart mappings on the command line
-cno <M-h> e ~/
-cno <M-j> e ./
 cno <M-c> e <C-\>eCurrentFileDir("e")<cr>
+
+if has('nvim')
+    tmap kj <C-\><C-n>
+    tmap jk <C-\><C-n>
+    " Terminal mode:
+    tnoremap <C-h> <c-\><c-n><c-w>h
+    tnoremap <C-j> <c-\><c-n><c-w>j
+    tnoremap <C-k> <c-\><c-n><c-w>k
+    tnoremap <C-l> <c-\><c-n><c-w>l
+endif
