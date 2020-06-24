@@ -34,6 +34,10 @@ if executable('xdg-open')
     call NERDTreeAddMenuItem({'text': '(o)pen the current node with system editor', 'shortcut': 'o', 'callback': 'NERDTreeExecuteFileLinux'})
 endif
 
+if nerdtree#runningWindows()
+    call NERDTreeAddMenuItem({'text': '(o)pen the current node with system editor', 'shortcut': 'o', 'callback': 'NERDTreeExecuteFileWindows'})
+endif
+
 if g:NERDTreePath.CopyingSupported()
     call NERDTreeAddMenuItem({'text': '(c)opy the current node', 'shortcut': 'c', 'callback': 'NERDTreeCopyNode'})
 endif
@@ -425,6 +429,7 @@ function! NERDTreeRevealFileLinux()
 
     if empty(l:node)
         return
+<<<<<<< HEAD
     endif
 
     " Handle the edge case of "/", which has no parent.
@@ -437,6 +442,20 @@ function! NERDTreeRevealFileLinux()
         return
     endif
 
+=======
+    endif
+
+    " Handle the edge case of "/", which has no parent.
+    if l:node.path.str() ==# '/'
+        call system('xdg-open /')
+        return
+    endif
+
+    if empty(l:node.parent)
+        return
+    endif
+
+>>>>>>> upstream/master
     call system('xdg-open ' . shellescape(l:node.parent.path.str()))
 endfunction
 
@@ -451,4 +470,18 @@ function! NERDTreeExecuteFileLinux()
     call system('xdg-open ' . shellescape(l:node.path.str()))
 endfunction
 
+<<<<<<< HEAD
+=======
+" FUNCTION: NERDTreeExecuteFileWindows() {{{1
+function! NERDTreeExecuteFileWindows()
+    let l:node = g:NERDTreeFileNode.GetSelected()
+
+    if empty(l:node)
+        return
+    endif
+
+    call system('cmd.exe /c start "" ' . shellescape(l:node.path.str()))
+endfunction
+
+>>>>>>> upstream/master
 " vim: set sw=4 sts=4 et fdm=marker:

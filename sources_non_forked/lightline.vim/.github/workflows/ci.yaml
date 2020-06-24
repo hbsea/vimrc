@@ -1,6 +1,14 @@
 name: CI
 
+<<<<<<< HEAD
 on: [push, pull_request]
+=======
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+>>>>>>> upstream/master
 
 jobs:
   test:
@@ -9,6 +17,10 @@ jobs:
     strategy:
       matrix:
         vim:
+<<<<<<< HEAD
+=======
+        - v8.2.1000
+>>>>>>> upstream/master
         - v8.2.0000
         - v8.1.0000
         - v8.0.0000
